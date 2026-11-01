@@ -4,7 +4,7 @@ set_property -dict { PACKAGE_PIN R2  IOSTANDARD SSTL135 }  [get_ports i_Clk_100]
 set_property INTERNAL_VREF 0.675 [get_iobanks 34]
 create_clock -period 10.000 -name clk100 [get_ports i_Clk_100]
 
-## 12 MHz: the same clock pin as the UART project
+## 12 MHz
 set_property -dict { PACKAGE_PIN F14 IOSTANDARD LVCMOS33 } [get_ports i_Clk_12]
 create_clock -period 83.333 -name clk12 [get_ports i_Clk_12]
 
