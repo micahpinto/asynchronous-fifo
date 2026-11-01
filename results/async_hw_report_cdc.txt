@@ -1,0 +1,45 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sat Oct 31 17:20:21 2026
+| Host         : DESKTOP-NH6OIBF running 64-bit major release  (build 9200)
+| Command      : report_cdc -details -file C:/Users/Presly/async_fifo_hw/async_hw_report_cdc.txt
+| Design       : async_top
+| Device       : 7s25-csga324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+CDC Report
+
+ID      Severity  Count  Description
+------  --------  -----  ----------------------------------------------
+CDC-1   Critical      1  1-bit unknown CDC circuitry
+CDC-6   Warning       2  Multi-bit synchronized with ASYNC_REG property
+CDC-15  Warning       8  Clock enable controlled CDC structure detected
+
+Source Clock: clk12
+Destination Clock: clk100
+CDC Type: No Common Primary Clock
+
+Row  ID     Severity  Description                                     Depth  Exception            Source (From)                   Destination (To)
+---  -----  --------  ----------------------------------------------  -----  -------------------  ------------------------------  ------------------------------------
+  1  CDC-6  Warning   Multi-bit synchronized with ASYNC_REG property      2  Asynch Clock Groups  FIFO_INST/r_Rd_Gray_reg[4:0]/C  FIFO_INST/r_Rd_Gray_Sync1_reg[4:0]/D
+
+Source Clock: clk100
+Destination Clock: clk12
+CDC Type: No Common Primary Clock
+
+Row  ID      Severity  Description                                     Depth  Exception            Source (From)                             Destination (To)
+---  ------  --------  ----------------------------------------------  -----  -------------------  ----------------------------------------  ------------------------------------
+  1  CDC-6   Warning   Multi-bit synchronized with ASYNC_REG property      2  Asynch Clock Groups  FIFO_INST/r_Wr_Gray_reg[4:0]/C            FIFO_INST/r_Wr_Gray_Sync1_reg[4:0]/D
+  2  CDC-1   Critical  1-bit unknown CDC circuitry                         0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMB/CLK     r_Error_reg/S
+  3  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMA/CLK     r_Expected_reg[0]/D
+  4  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMA/CLK     r_Expected_reg[1]/D
+  5  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMA/CLK     r_Expected_reg[2]/D
+  6  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMA/CLK     r_Expected_reg[3]/D
+  7  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMC/CLK     r_Expected_reg[4]/D
+  8  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMA/CLK     r_Expected_reg[5]/D
+  9  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMB_D1/CLK  r_Expected_reg[6]/D
+ 10  CDC-15  Warning   Clock enable controlled CDC structure detected      0  Asynch Clock Groups  FIFO_INST/r_Mem_reg_0_15_0_5/RAMB_D1/CLK  r_Expected_reg[7]/D
+
