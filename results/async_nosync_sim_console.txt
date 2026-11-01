@@ -1,0 +1,22 @@
+542000: read 8c, expected 4b
+579000: read 4b, expected d6
+616000: read d6, expected a7
+653000: read a7, expected a2
+690000: read a2, expected 7b
+727000: read 7b, expected 55
+801000: read 55, expected 37
+949000: read 37, expected 59
+986000: read 59, expected 24
+1097000: read 86, expected 62
+1134000: read 7c, expected 01
+1171000: read 24, expected 40
+1282000: read 62, expected 02
+1356000: read 44, expected 5d
+1393000: read 01, expected 05
+1430000: empty = 0 but the FIFO holds no data
+1467000: read ad, expected 70
+1615000: read ef, expected 74
+1652000: read 02, expected 32
+1689000: empty = 0 but the FIFO holds no data
+STOPPED: 20 errors reached, TEST FAILED
+$finish called at time : 1688500 ps

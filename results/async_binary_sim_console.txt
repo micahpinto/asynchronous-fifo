@@ -1,0 +1,8 @@
+Phase 1: writer faster (fills up) write  10.0 ns, read  37.0 ns: 2000 bytes, 0 errors
+   Phase 2: reader faster (drains) write  37.0 ns, read  10.0 ns: 2000 bytes, 0 errors
+    Phase 3: almost the same speed write  10.0 ns, read  10.7 ns: 2000 bytes, 0 errors
+----------------------------------
+Clocks with full = 1: 7911, clocks with empty = 1: 7594
+TEST PASSED: 0 errors
+----------------------------------
+$finish called at time : 240466050 ps 

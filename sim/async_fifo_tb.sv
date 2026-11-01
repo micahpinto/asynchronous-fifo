@@ -10,14 +10,14 @@ module async_fifo_tb;
   localparam int DEPTH   = 8;        // small, so full happens often
   localparam int N_BYTES = 2000;     // bytes per phase
 
-  //two clocks, with periods we can change during the test
+  // ---------- two clocks, with periods we can change during the test ----------
   real wr_half = 5.0;                // write clock: half period in ns
   real rd_half = 5.0;                // read clock:  half period in ns
   logic wr_clk = 0, rd_clk = 0;
   always #(wr_half) wr_clk = ~wr_clk;
   always #(rd_half) rd_clk = ~rd_clk;
 
-  // FIFO signals
+  // ---------- FIFO signals ----------
   logic             wr_en = 0, rd_en = 0;
   logic [WIDTH-1:0] wr_data = '0;
   logic [WIDTH-1:0] rd_data;
@@ -34,12 +34,12 @@ module async_fifo_tb;
     .o_Empty   (empty)
   );
 
-  // reference model and counters 
+  // ---------- reference model and counters ----------
   logic [WIDTH-1:0] model [$];       // what the FIFO should contain, oldest first
   int errors = 0;
-  int n_full = 0, n_empty = 0;       // clocks where the flag was 1 (coverage), to count number of fulls and emptys
+  int n_full = 0, n_empty = 0;       // clocks where the flag was 1 (coverage)
 
-  // writer: runs on the write clock 
+  // ---------- writer: runs on the write clock ----------
   task automatic writer(int n, int p_wr);
     int written = 0;
     while (written < n) begin
@@ -61,7 +61,7 @@ module async_fifo_tb;
     wr_en = 0;
   endtask
 
-  //reader: runs on the read clock
+  // ---------- reader: runs on the read clock ----------
   task automatic reader(int n, int p_rd);
     int got = 0;
     while (got < n) begin
@@ -74,11 +74,13 @@ module async_fifo_tb;
       end
       rd_en = ($urandom_range(0, 99) < p_rd);     // read with probability p_rd %
       if (rd_en && !empty) begin                  // this read will be accepted
-        if (rd_data !== model[0]) begin
-          $display("%0t: read %h, expected %h", $time, rd_data, model[0]);
-          errors++;
+        if (model.size() > 0) begin               // NEW: only compare if the model has a byte
+          if (rd_data !== model[0]) begin
+            $display("%0t: read %h, expected %h", $time, rd_data, model[0]);
+            errors++;
+          end
+          void'(model.pop_front());
         end
-        void'(model.pop_front());
         got++;
       end
     end
@@ -86,7 +88,7 @@ module async_fifo_tb;
     rd_en = 0;
   endtask
 
-  //one phase: set the clocks, then write and read at the same time
+  // ---------- one phase: set the clocks, then write and read at the same time ----------
   task automatic run_phase(string name, real wr_period, real rd_period);
     int err_before = errors;
     wr_half = wr_period / 2.0;
@@ -116,7 +118,14 @@ module async_fifo_tb;
     $finish;
   end
 
-  //watchdog: if bytes get lost, the reader would wait forever
+  // ---------- NEW: error limit: stop early if the design is badly broken ----------
+  initial begin
+    wait (errors >= 20);
+    $display("STOPPED: 20 errors reached, TEST FAILED");
+    $finish;
+  end
+
+  // ---------- watchdog: if bytes get lost, the reader would wait forever ----------
   initial begin
     #10ms;
     $display("TIMEOUT: the test did not finish (bytes lost?)");
