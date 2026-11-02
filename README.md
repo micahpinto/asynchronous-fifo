@@ -31,9 +31,9 @@ each through a **2-flop synchronizer**.
  i_Wr_Data ──> [ memory 16 x 8 ] ─────────────────────────────> o_Rd_Data
                    ^ write addr                       ^ read addr
  r_Wr_Ptr ── bin->Gray ── r_Wr_Gray ──> Sync1 ─> Sync2 ──> compare ─> o_Empty
-                                        (rd_clk)  (rd_clk)    ▲
+                                        (rd_clk)  (rd_clk)    ^
                                                            r_Rd_Ptr
- o_Full <── compare <── Sync2 <── Sync1 <── r_Rd_Gray ── bin->Gray ── r_Rd_Ptr
+ o_Full <── compare <── Sync2 <── Sync1 <── r_Rd_Gray ── bin-> Gray ── r_Rd_Ptr
                ^       (wr_clk) (wr_clk)
             r_Wr_Ptr
 ```
